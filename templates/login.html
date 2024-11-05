@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Employer Home</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0 text-center">Log In</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="/members/signup">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

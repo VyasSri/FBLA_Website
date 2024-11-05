@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% if job %} Edit Job {% else %} New Job {% endif %} - Brand</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .form-input {
+            max-width: 350px;
+            width: 100%; 
+            margin: 10px auto;
+        }
+
+        .submit-btn {
+            max-width: 200px;
+            margin: 20px auto;
+        }
+
+        .form-container {
+            margin-top: 50px;
+        }
+
+        .alert-success, .alert-danger {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                <h2>{% if job %} Edit Job Posting {% else %} New Job Posting {% endif %}</h2>
+                
+                <!-- Success Message -->
+                {% if success_msg %}
+                <div class="alert alert-success">
+                    {{ success_msg }}
+                </div>
+                {% endif %}
+
+                <!-- Error Message -->
+                {% if error_msg %}
+                <div class="alert alert-danger">
+                    {{ error_msg }}
+                </div>
+                {% endif %}
+
+                <form method="POST" class="p-3">
+                    {% csrf_token %}
+                    <div class="form-group form-input">
+                        {{ form.job_title }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.company }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_hours }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_skills }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_description }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_location }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_date }}
+                    </div>
+                    <div class="form-group form-input">
+                        {{ form.job_capacity }}
+                    </div>
+                    <!-- Button that changes based on if it's an update or a new job -->
+                    <button class="btn btn-primary shadow d-block w-100 submit-btn" type="submit">
+                        {% if job %}
+                            Update
+                        {% else %}
+                            Submit
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

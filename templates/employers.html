@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Available Opportunities - Brand</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .container h1 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Available Opportunities</h1>
+
+        <!-- Display success or error message -->
+        {% if message %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+        {% endif %}
+    
+        <div class="row">
+            {% for job_info in job_data %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-header">{{ job_info.job.job_title }}</h5>
+                        <p class="published-by">Published by: {{ job_info.job.user.username }}</p>
+                        <p class="card-text">Workshop Duration: {{ job_info.job.job_hours }} hours</p>
+                        <p class="card-text">{{ job_info.job.job_description }}</p>
+                        <p class="card-text">Skills Required: {{ job_info.job.job_skills }}</p>
+                        <p class="card-text">Workshop Date: {{ job_info.job.job_date }}</p>
+                        <p class="card-text">Workshop Location: {{ job_info.job.job_location }}</p>
+                        <p class="card-text">Capacity: {{ job_info.job.job_capacity }}</p>
+        
+                        {% if not profile_exists %}
+                            <p class="text-warning">Complete your profile before applying.</p>
+                        {% elif job_info.has_applied %}
+                            <p class="text-success">You have already applied for this opportunity.</p>
+                        {% elif not job_info.can_apply_flag %}
+                            <p class="text-danger">Workshop capacity reached.</p>
+                        {% else %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="apply_job_id" value="{{ job_info.job.id }}">
+                                <button type="submit" class="btn btn-success">Apply</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+                
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

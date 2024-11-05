@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Nexternship</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-dark" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="width: 64px; height: 64px; border-radius: 50%; background-color: #007bff;">
+                    <img src="{% static 'img/Nexternship.png' %}" width="72" height="72">
+                </span>
+                <span>Nexternship</span>
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% if not user.is_staff %}/studentdash{% else %}/employererror{% endif %}">
+                                Student Dashboard
+                            </a>
+                        </li>                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% if user.is_staff %}/employer{% else %}/studenterror{% endif %}">
+                                Employer Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/members/changepassword/">
+                                Account Settings
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/aboutus">About Us</a></li>
+                </ul>
+                {% if user.is_authenticated %}
+                    <span class="navbar-text text-white">Hello, {{ user.username }}!</span>
+                    <a class="btn btn-primary shadow ms-2" role="button" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="btn btn-primary shadow" role="button" href="/members/login">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <footer class="bg-dark">
+        <div class="container py-4 py-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                    <h3 class="fs-6 fw-bold">Employers</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="{% if user.is_staff %}/talent{% else %}/studenterror{% endif %}">View Potential Candidates</a></li>
+                        <li><a href="{% if user.is_staff %}/employer{% else %}/studenterror{% endif %}">Post Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                    <h3 class="fs-6 fw-bold">Students</h3>
+                    <ul class="list-unstyled">
+                        {% if user.is_authenticated %}
+                            <li><a href= "{% if not user.is_staff %}/profile{% else %}/employererror{% endif %}"> Build your Profile</a></li>
+                        {% else %}
+                            <li><a href="/members/signup">Sign Up</a></li>
+                        {% endif %}
+                        </ul>
+                </div>
+                <div class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                    <div class="fw-bold d-flex align-items-center mb-2">
+                        <span class="bs-icon-sm bs-icon-circle bs-icon-primary d-flex justify-content-center align-items-center bs-icon me-2" style="width: 64px; height: 64px; border-radius: 50%; background-color: #007bff;">
+                            <img src="{% static 'img/Nexternship.png' %}" width="72" height="72">
+                        </span>
+                        <span>Nexternship</span>
+                    </div>
+                    <p class="text-muted">Where talent meets opportunity</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </footer>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+</html>

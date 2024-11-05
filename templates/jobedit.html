@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Edit Job - Brand</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .container h1 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            margin-top: 15px;
+        }
+
+        .edit-btn, .delete-btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Your Workshop Postings</h2>
+    <div class="row">
+        {% if jobs %}
+            {% for job in jobs %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-header">{{ job.job_title }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Company: {{ job.company }}</h5>
+                            <p class="card-text">Hours/Week: {{ job.job_hours }}</p>
+                            <p class="card-text">Skills: {{ job.job_skills }}</p>
+                            <p class="card-text">Overview: {{ job.job_description }}</p>
+                            <p class="card-text">Workshop Date: {{ job.job_date }}</p>
+                            <p class="card-text">Workshop Location: {{ job.job_location }}</p>
+                            <p class="card-text">Workshop Capacity: {{job.job_capacity}}</p>
+
+                            <a href="{% url 'edit_job' job.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'confirmdelete' job.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have not posted any jobs yet.</p>
+        {% endif %}
+    </div>
+</div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

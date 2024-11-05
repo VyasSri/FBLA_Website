@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Nexternship</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+</head>
+{% block content %}
+<body>
+    <div class="container">
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <header class="bg-dark d-flex align-items-center justify-content-center" style="height: 20vh;">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="fw-bold">Nexternship - Where Talent Meets Opportunity</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-5"></section>
+    <section>
+        <div class="container bg-dark py-5">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <p class="fw-bold text-success mb-2">Our Services</p>
+                    <h3 class="fw-bold">Your Possibilities on Nexternship</h3>
+                </div>
+            </div>
+            <div class="py-5 p-lg-5">
+                <!-- Bootstrap Carousel Structure with Auto-Rotate and No Arrows -->
+                <div id="nexternshipCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                    <div class="carousel-inner">
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="fw-bold card-title">Connect with Companies</h3>
+                                    <p>Connect with employers that are providing valuable experiences!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-item">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="fw-bold card-title">Customize Your Profile</h3>
+                                    <p>Add experiences, skills, and qualities to your profile to stand out to employers!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-item">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="fw-bold card-title">Apply for Workshops</h3>
+                                    <p>Find workshops that align with your career goals and apply to gain industry experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="carousel-item">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="fw-bold card-title">Gain Industry Insights</h3>
+                                    <p>Stay updated on trends and gain insights to grow your career in meaningful ways.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions and Buttons Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-3">How to Use Nexternship</h2>
+                    <p class="lead">Learn how to take full advantage of Nexternship, whether you're a student looking for opportunities or an employer looking to offer valuable experiences. Select your role below for detailed instructions.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <a href="{% url 'studentinstructions' %}" class="btn btn-primary btn-lg px-4 mx-2">Student Instructions</a>
+                    <a href="{% url 'employerinstructions' %}" class="btn btn-primary btn-lg px-4 mx-2">Employer Instructions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts included at the bottom for better loading performance -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+{% endblock %}
+</html>

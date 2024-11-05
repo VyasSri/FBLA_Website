@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Services - Brand</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .about-section, .founders-section {
+            max-width: 900px;
+            margin: auto;
+            padding-bottom: 30px;
+            text-align: center; /* Centering text for the whole section */
+        }
+        .founder-card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .founder-img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .founder-info {
+            margin-top: 15px;
+        }
+        .get-started-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+        }
+        .about-section h5, .about-section p {
+            text-align: center; /* Center the headings and text in About Us section */
+        }
+    </style>
+</head>
+
+<body>
+    <section class="py-5">
+        <div class="container py-5 about-section">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold">About Us</h3>
+                </div>
+            </div>
+
+            <!-- About Us Section -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="fw-bold">What is Nexternship?</h5>
+                    <p class="text-muted">We are a platform founded by high schoolers who had trouble finding technical experience to use in professional fields. We wanted to give the students of tomorrow the opportunity to excel with qualities that real-world companies value.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="fw-bold">What Do We Do?</h5>
+                    <p class="text-muted">By identifying the experiences, interests, and profiles of students, we can connect them to relevant workshops in the fields they desired, posted by reputable and respected companies.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="fw-bold">Our Mission</h5>
+                    <p class="text-muted">Our goal is to establish a long-standing connection between high schoolers and local businesses, ensuring mutual success and prosperity for all involved. As a byproduct of this, we will be molding the students of tomorrow into a competent batch of leaders.</p>
+                </div>
+            </div>
+
+            <!-- Get Started Button -->
+            <button class="btn btn-primary get-started-btn" type="button" onclick="location.href='{% url 'signup' %}'">Get Started Today!</button>
+        </div>
+        
+        <!-- Meet Our Founders Section -->
+        <div class="container py-5 founders-section">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold">Meet Our Founders</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Founder 1 -->
+                <div class="col-md-3 founder-card">
+                    <img src="{% static 'img/LakshyaPic.jpg' %}" class="founder-img">
+                    <div class="founder-info">
+                        <h5 class="fw-bold">Lakshya Agarwal</h5>
+                        <p class="text-muted">Lakshya is a current senior in high school who is interested in finance and management. He is excited to provide these exclusive opportunities for the students of tomorrow!</p>
+                    </div>
+                </div>
+
+                <!-- Founder 2 -->
+                <div class="col-md-3 founder-card">
+                    <img src="{% static 'img/IMG_5292.jpg' %}" class="founder-img">
+                    <div class="founder-info">
+                        <h5 class="fw-bold">Siddarth Diwakar</h5>
+                        <p class="text-muted">Sid is a senior in high school with a passion for computer science. His valuable experiences in various programming languages can assist one and all!</p>
+                    </div>
+                </div>
+
+                <!-- Founder 3 -->
+                <div class="col-md-3 founder-card">
+                    <img src="{% static 'img/IMG_0065-1.jpg' %}" class="founder-img">
+                    <div class="founder-info">
+                        <h5 class="fw-bold">Vyas Sriman</h5>
+                        <p class="text-muted">Vyas is a senior in high school with a passion for electrical engineering. He is thrilled to start this initiative and connect deserving students to the platform they deserve!</p>
+                    </div>
+                </div>
+
+                <!-- Founder 4 -->
+                <div class="col-md-3 founder-card">
+                    <img src="{% static 'img/prof_pic.jpg' %}" class="founder-img">
+                    <div class="founder-info">
+                        <h5 class="fw-bold">Svar Chandak</h5>
+                        <p class="text-muted">Svar is a sophomore in high school with a passion for both business and computer science. His experience in these fields make him a great person to talk to!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Accepted and Rejected Applicants - Employer List</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            font-size: 1.25rem;
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .container h1 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: black;
+            font-weight: 700;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="py-5">
+        <div class="container py-5">
+            <!-- Accepted Applicants Section -->
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold text-success mb-2">Accepted Students</h2>
+                    <p class="text-muted">Here are the applicants that have been accepted for your workshops</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for application in accepted_applications %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{ application.student.student_name }}</div>
+                        <div class="card-body">
+                            <h6 class="card-title">Workshop: {{ application.job.job_title }}</h6>
+                            <p class="card-text"><strong>Email: </strong> {{ application.student.student_email }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No accepted applicants yet.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Rejected Applicants Section -->
+            <div class="row mb-4 mb-lg-5 mt-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold text-danger mb-2">Rejected Students</h2>
+                    <p class="text-muted">Here are the applicants that have been rejected for your workshops</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for application in rejected_applications %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{ application.student.student_name }}</div>
+                        <div class="card-body">
+                            <h6 class="card-title">Workshop: {{ application.job.job_title }}</h6>
+                            <p class="card-text"><strong>Email: </strong> {{ application.student.student_email }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No rejected applicants yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>

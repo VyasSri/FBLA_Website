@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Student Information</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+</head>
+
+<body>
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <p class="fw-bold text-success mb-2">Student Profile</p>
+                    <h2 class="fw-bold">
+                        {% if student_info %}
+                            Edit your Information
+                        {% else %}
+                            Add your Information
+                        {% endif %}
+                    </h2>
+                    <h2 class="fw-bold">and Stand out to Employers</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-6" style="padding-right: 266px;margin-right: -261px;">
+                    <p style="padding-right: 0px;margin-right: 0px;margin-top: 23px;">Add in all of your information to post your profile to employers. Add in everything that will help you stand out amongst employers!<br><br><br>Some skills you can list include: Java, Python, etc. (any technical knowledge that would help you in these endeavors)<br><br><br>Upload your resumes to give details about yourself.&nbsp;</p>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div>
+                        {% if success_msg %}
+                            <div class="alert alert-success">{{ success_msg }}</div>
+                        {% endif %}
+                        {% if error_msg %}
+                            <div class="alert alert-danger">{{ error_msg }}</div>
+                        {% endif %}
+                        <form class="p-3 p-xl-4" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.student_name }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_grade }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_email }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_skills }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_experience }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_info }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.student_resume }}
+                            <div class="d-grid">
+                                <button class="btn btn-primary shadow d-block w-100" type="submit">
+                                    {% if student_info %}
+                                        Update
+                                    {% else %}
+                                        Submit
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bold-and-dark.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+{% endblock %}
+</html>
