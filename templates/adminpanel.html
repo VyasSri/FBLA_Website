@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <style>
+        .card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #007bff; /* Match site's primary blue */
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            font-size: 1.2rem;
+            padding: 15px;
+            text-align: center;
+        }a
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        .approve-reject-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .btn-approve, .btn-reject {
+            width: 48%;
+        }
+
+        .container h2 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #007bff;
+            font-weight: 700;
+        }
+    </style>
+</head>
+{% block content %}
+<body>
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Admin Panel - Approve or Reject Job Postings</h2>
+        
+        {% if unapproved_jobs %}
+            <div class="row">
+                {% for job in unapproved_jobs %}
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">{{ job.job_title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Company:</strong> {{ job.company }}</p>
+                            <p><strong>Description:</strong> {{ job.job_description }}</p>
+                            <p><strong>Questions:</strong> {{ job.job_questions }}</p>
+                            <p><strong>Capacity:</strong> {{ job.job_capacity }}</p>
+                            <p><strong>Posted by:</strong> {{ job.user.username }}</p>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="job_id" value="{{ job.id }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                                <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">No job postings awaiting approval.</p>
+        {% endif %}
+    </div>
+</body>
+{% endblock %}
+</html>

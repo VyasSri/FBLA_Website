@@ -64,46 +64,39 @@
 <body>
     <div class="container">
         <h1>Available Opportunities</h1>
-
-        <!-- Display success or error message -->
         {% if message %}
-        <div class="alert alert-info">
-            {{ message }}
-        </div>
+            <div class="alert alert-info">{{ message }}</div>
         {% endif %}
-    
+        
         <div class="row">
             {% for job_info in job_data %}
             <div class="col-md-4">
                 <div class="card">
+                    <div class="card-header">{{ job_info.job.job_title }}</div>
                     <div class="card-body">
-                        <h5 class="card-header">{{ job_info.job.job_title }}</h5>
-                        <p class="published-by">Published by: {{ job_info.job.user.username }}</p>
-                        <p class="card-text">Workshop Duration: {{ job_info.job.job_hours }} hours</p>
-                        <p class="card-text">{{ job_info.job.job_description }}</p>
-                        <p class="card-text">Skills Required: {{ job_info.job.job_skills }}</p>
-                        <p class="card-text">Workshop Date: {{ job_info.job.job_date }}</p>
-                        <p class="card-text">Workshop Location: {{ job_info.job.job_location }}</p>
-                        <p class="card-text">Capacity: {{ job_info.job.job_capacity }}</p>
-        
-                        {% if not profile_exists %}
-                            <p class="text-warning">Complete your profile before applying.</p>
-                        {% elif job_info.has_applied %}
+                        <p class="card-text"><strong>Company:</strong> {{ job_info.job.company }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ job_info.job.job_description }}</p>
+                        <p class="card-text"><strong>Skills Required:</strong> {{ job_info.job.job_skills }}</p>
+                        <p class="card-text"><strong>Questions:</strong> {{ job_info.job.job_questions }}</p>
+                        
+                        {% if job_info.has_applied %}
                             <p class="text-success">You have already applied for this opportunity.</p>
                         {% elif not job_info.can_apply_flag %}
-                            <p class="text-danger">Workshop capacity reached.</p>
+                            <p class="text-danger">Job capacity reached.</p>
+                        {% elif not profile_exists %}
+                            <p class="text-warning">Complete your profile before applying.</p>
                         {% else %}
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="apply_job_id" value="{{ job_info.job.id }}">
-                                <button type="submit" class="btn btn-success">Apply</button>
+                                {{ form.essay_answer }}
+                                <button type="submit" class="btn btn-success mt-2">Apply</button>
                             </form>
                         {% endif %}
                     </div>
                 </div>
             </div>
-        {% endfor %}
-                
+            {% endfor %}
         </div>
     </div>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

@@ -68,7 +68,7 @@
 
 <body>
 <div class="container">
-    <h2>Your Workshop Postings</h2>
+    <h2>Your Job Postings</h2>
     <div class="row">
         {% if jobs %}
             {% for job in jobs %}
@@ -78,11 +78,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Company: {{ job.company }}</h5>
                             <p class="card-text">Hours/Week: {{ job.job_hours }}</p>
-                            <p class="card-text">Skills: {{ job.job_skills }}</p>
-                            <p class="card-text">Overview: {{ job.job_description }}</p>
-                            <p class="card-text">Workshop Date: {{ job.job_date }}</p>
-                            <p class="card-text">Workshop Location: {{ job.job_location }}</p>
-                            <p class="card-text">Workshop Capacity: {{job.job_capacity}}</p>
+                            <p class="card-text">Required Skills: {{ job.job_skills }}</p>
+                            <p class="card-text">Job Description: {{ job.job_description }}</p>
+                            <p class="card-text">Required Job Questions: {{ job.job_questions }}</p>
+                            <p class="card-text">Job Capacity: {{job.job_capacity}}</p>
 
                             <a href="{% url 'edit_job' job.id %}" class="btn btn-primary">Edit</a>
                             <a href="{% url 'confirmdelete' job.id %}" class="btn btn-danger">Delete</a>

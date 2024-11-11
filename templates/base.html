@@ -28,25 +28,39 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    
                     {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <!-- Show Admin Panel for Superusers -->
+                            <li class="nav-item"><a class="nav-link" href="/adminpanel">Admin Panel</a></li>
+                        {% elif user.is_staff %}
+                            <!-- Show Employer Home for Employers (staff) only -->
+                            <li class="nav-item"><a class="nav-link" href="/employer">Employer Home</a></li>
+                        {% else %}
+                            <!-- Show Student Dashboard for Students only (non-staff) -->
+                            <li class="nav-item"><a class="nav-link" href="/studentdash">Student Dashboard</a></li>
+                        {% endif %}
+
+                        <!-- Inbox Link with Notification Count -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% if not user.is_staff %}/studentdash{% else %}/employererror{% endif %}">
-                                Student Dashboard
-                            </a>
-                        </li>                    
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% if user.is_staff %}/employer{% else %}/studenterror{% endif %}">
-                                Employer Home
+                            <a class="nav-link" href="{% url 'inbox' %}">
+                                Inbox
+                                {% if unread_notifications_count > 0 %}
+                                    <span class="badge bg-danger">{{ unread_notifications_count }}</span>
+                                {% endif %}
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/members/changepassword/">
                                 Account Settings
                             </a>
                         </li>
                     {% endif %}
+                    
                     <li class="nav-item"><a class="nav-link" href="/aboutus">About Us</a></li>
                 </ul>
+                
                 {% if user.is_authenticated %}
                     <span class="navbar-text text-white">Hello, {{ user.username }}!</span>
                     <a class="btn btn-primary shadow ms-2" role="button" href="{% url 'logout' %}">Logout</a>
@@ -56,15 +70,17 @@
             </div>
         </div>
     </nav>
+    
     {% block content %}
     {% endblock %}
+    
     <footer class="bg-dark">
         <div class="container py-4 py-lg-5">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Employers</h3>
                     <ul class="list-unstyled">
-                        <li><a href="{% if user.is_staff %}/talent{% else %}/studenterror{% endif %}">View Potential Candidates</a></li>
+                        <li><a href="{% if user.is_staff %}/manage_applications{% else %}/studenterror{% endif %}">View Potential Candidates</a></li>
                         <li><a href="{% if user.is_staff %}/employer{% else %}/studenterror{% endif %}">Post Jobs</a></li>
                     </ul>
                 </div>
@@ -72,11 +88,11 @@
                     <h3 class="fs-6 fw-bold">Students</h3>
                     <ul class="list-unstyled">
                         {% if user.is_authenticated %}
-                            <li><a href= "{% if not user.is_staff %}/profile{% else %}/employererror{% endif %}"> Build your Profile</a></li>
+                            <li><a href="{% if not user.is_staff %}/profile{% else %}/employererror{% endif %}">Build your Profile</a></li>
                         {% else %}
                             <li><a href="/members/signup">Sign Up</a></li>
                         {% endif %}
-                        </ul>
+                    </ul>
                 </div>
                 <div class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
                     <div class="fw-bold d-flex align-items-center mb-2">
@@ -86,11 +102,14 @@
                         <span>Nexternship</span>
                     </div>
                     <p class="text-muted">Where talent meets opportunity</p>
+                    <!-- New Licensing Link -->
+                    <a href="/licensing" class="text-muted" style="text-decoration: underline;">Licensing</a>
                 </div>
             </div>
             <hr>
         </div>
     </footer>
+    
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bold-and-dark.js' %}"></script>
     <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import StudentInfo, JobPosting
+from .models import StudentInfo, JobPosting, JobApplication
 
 
 class StudentForm(ModelForm):
@@ -22,15 +22,21 @@ class StudentForm(ModelForm):
 class JobForm(forms.ModelForm):
     class Meta:
         model = JobPosting
-        fields = ['job_title', 'job_hours', 'job_skills', 'job_description', 'company', 'job_date', 'job_location', 'job_capacity']
+        fields = ['job_title', 'job_hours', 'job_skills', 'job_description', 'company', 'job_questions','job_capacity']
         widgets = {
-            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Workshop Title'}),
-            'job_hours': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Workshop Duration(Hours)'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job Title'}),
+            'job_hours': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Hours/Week'}),
             'job_skills': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Areas of Interest'}),
-            'job_description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Workshop Description'}),
+            'job_description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Job Description'}),
             'company': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Company Name'}),
-            'job_date': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Workshop Date'}),
-            'job_location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Workshop Location'}),
-            'job_capacity': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Workshop Capacity'})
+            'job_questions': forms.Textarea(attrs={'class': 'form-control','placeholder': 'Required Essay Questions'}),
+            'job_capacity': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Job Capacity'})
         }
 
+class JobApplicationForm(forms.ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = ['essay_answer']
+        widgets = {
+            'essay_answer': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Answer the job questions here'}),
+        }

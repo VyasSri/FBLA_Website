@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Manage Applications</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <style>
+        .card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .container h1 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+{% block content %}
+<body>
+    <section class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">Manage Applications</h2>
+
+            {% if message %}
+                <div class="alert alert-info text-center">{{ message }}</div>
+            {% endif %}
+
+            <!-- Pending Applications -->
+            <h3 class="fw-bold text-primary section-title">Pending Applications</h3>
+            <div class="row">
+                {% for application in pending_applications %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">{{ application.student.student_name }} - {{ application.job.job_title }}</div>
+                            <div class="card-body">
+                                <p><strong>Email:</strong> {{ application.student.student_email }}</p>
+                                <p><strong>Essay Answer:</strong> {{ application.essay_answer|default:"No answer provided." }}</p>
+
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="application_id" value="{{ application.id }}">
+                                    <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
+                                    <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-center">No pending applications.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Accepted Applications -->
+            <h3 class="fw-bold text-success section-title">Accepted Applications</h3>
+            <div class="row">
+                {% for application in accepted_applications %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">{{ application.student.student_name }} - {{ application.job.job_title }}</div>
+                            <div class="card-body">
+                                <p><strong>Email:</strong> {{ application.student.student_email }}</p>
+                                <p><strong>Essay Answer:</strong> {{ application.essay_answer|default:"No answer provided." }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-center">No accepted applications.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Rejected Applications -->
+            <h3 class="fw-bold text-danger section-title">Rejected Applications</h3>
+            <div class="row">
+                {% for application in rejected_applications %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">{{ application.student.student_name }} - {{ application.job.job_title }}</div>
+                            <div class="card-body">
+                                <p><strong>Email:</strong> {{ application.student.student_email }}</p>
+                                <p><strong>Essay Answer:</strong> {{ application.essay_answer|default:"No answer provided." }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-center">No rejected applications.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+{% endblock %}
+</html>

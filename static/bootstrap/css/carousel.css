@@ -1,0 +1,15 @@
+.btn-yellow {
+    background-color: #ffd700 !important; /* Yellow background */
+    color: #001f3f !important; /* Navy text */
+    border: none !important;
+}
+
+.btn-yellow:hover {
+    background-color: #e6c200 !important; /* Slightly darker yellow on hover */
+    color: #001f3f !important;
+}
+
+.btn-yellow:focus, .btn-yellow:active {
+    background-color: #ccad00 !important; /* Even darker yellow when active */
+    color: #001f3f !important;
+}

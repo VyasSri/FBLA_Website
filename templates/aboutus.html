@@ -1,13 +1,12 @@
-{% extends 'base.html' %}
-{% load static %}
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Services - Brand</title>
+    <title>About Us - Nexternship</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="{% static 'css/swiper-icons.css' %}">
@@ -19,7 +18,7 @@
             max-width: 900px;
             margin: auto;
             padding-bottom: 30px;
-            text-align: center; /* Centering text for the whole section */
+            text-align: center;
         }
         .founder-card {
             text-align: center;
@@ -27,9 +26,10 @@
         }
         .founder-img {
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
+            margin: 0 auto; /* Center the image */
         }
         .founder-info {
             margin-top: 15px;
@@ -40,7 +40,7 @@
             padding: 15px 40px;
         }
         .about-section h5, .about-section p {
-            text-align: center; /* Center the headings and text in About Us section */
+            text-align: center;
         }
     </style>
 </head>
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h5 class="fw-bold">What Do We Do?</h5>
-                    <p class="text-muted">By identifying the experiences, interests, and profiles of students, we can connect them to relevant workshops in the fields they desired, posted by reputable and respected companies.</p>
+                    <p class="text-muted">By identifying the experiences, interests, and profiles of students, we can connect them to relevant jobs in the fields they desire, posted by reputable and respected companies.</p>
                 </div>
             </div>
             <div class="row">
@@ -86,49 +86,37 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- Founder 1 -->
                 <div class="col-md-3 founder-card">
-                    <img src="{% static 'img/LakshyaPic.jpg' %}" class="founder-img">
+                    <img src="{% static 'img/Varun.jpg' %}" class="founder-img" alt="Varun Akondy">
                     <div class="founder-info">
-                        <h5 class="fw-bold">Lakshya Agarwal</h5>
-                        <p class="text-muted">Lakshya is a current senior in high school who is interested in finance and management. He is excited to provide these exclusive opportunities for the students of tomorrow!</p>
+                        <h5 class="fw-bold">Varun Akondy</h5>
+                        <p class="text-muted">Passionate about technology and student development.</p>
                     </div>
                 </div>
 
                 <!-- Founder 2 -->
                 <div class="col-md-3 founder-card">
-                    <img src="{% static 'img/IMG_5292.jpg' %}" class="founder-img">
+                    <img src="{% static 'img/Sahil.jpg' %}" class="founder-img" alt="Sahil Nawal">
                     <div class="founder-info">
-                        <h5 class="fw-bold">Siddarth Diwakar</h5>
-                        <p class="text-muted">Sid is a senior in high school with a passion for computer science. His valuable experiences in various programming languages can assist one and all!</p>
+                        <h5 class="fw-bold">Sahil Nawal</h5>
+                        <p class="text-muted">Committed to bridging students with valuable experiences.</p>
                     </div>
                 </div>
 
                 <!-- Founder 3 -->
                 <div class="col-md-3 founder-card">
-                    <img src="{% static 'img/IMG_0065-1.jpg' %}" class="founder-img">
+                    <img src="{% static 'img/IMG_0065-1.jpg' %}" class="founder-img" alt="Vyas Sriman">
                     <div class="founder-info">
                         <h5 class="fw-bold">Vyas Sriman</h5>
-                        <p class="text-muted">Vyas is a senior in high school with a passion for electrical engineering. He is thrilled to start this initiative and connect deserving students to the platform they deserve!</p>
-                    </div>
-                </div>
-
-                <!-- Founder 4 -->
-                <div class="col-md-3 founder-card">
-                    <img src="{% static 'img/prof_pic.jpg' %}" class="founder-img">
-                    <div class="founder-info">
-                        <h5 class="fw-bold">Svar Chandak</h5>
-                        <p class="text-muted">Svar is a sophomore in high school with a passion for both business and computer science. His experience in these fields make him a great person to talk to!</p>
+                        <p class="text-muted">Dedicated to creating a pathway for students to succeed.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/bold-and-dark.js' %}"></script>
-    <script src="{% static 'js/Simple-Slider-swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 {% endblock %}
 </html>

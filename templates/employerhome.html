@@ -13,6 +13,22 @@
     <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
     <link rel="stylesheet" href="{% static 'css/Simple-Slider-swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/Simple-Slider.css' %}">
+    <style>
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .card-body h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .card-body p {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 {% block content %}
@@ -56,12 +72,9 @@
                                             {{ form.job_description }}
                                         </div>
                                         <div class="mb-3">
-                                            {{ form.job_location }}
+                                            {{ form.job_questions }}
                                         </div>
                                         <div class="mb-3">
-                                            {{ form.job_date }}
-                                        </div>
-                                        <div class="mb-3"></div>
                                             {{ form.job_capacity }}
                                         </div>
                                         <div class="d-grid">
@@ -74,14 +87,14 @@
                     </div>
 
                     <!-- Row for buttons side by side -->
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <!-- Talent Pool Section -->
                         <div class="col-md-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center">
                                     <h2 class="mb-3">Find Local Talent</h2>
                                     <p>Click here to find out about students who have applied to your jobs!</p>
-                                    <button class="btn btn-primary w-100" type="button" onclick="location.href='{% url 'talent' %}'">View Talent Pool</button>
+                                    <button class="btn btn-primary w-100" type="button" onclick="location.href='{% url 'manage_applications' %}'">View Talent Pool</button>
                                 </div>
                             </div>
                         </div>
@@ -90,25 +103,13 @@
                         <div class="col-md-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center">
-                                    <h2 class="mb-3">Edit Your Workshops</h2>
-                                    <p>Click here to edit your posted workshops. You can modify or remove any of your workshop postings.</p>
-                                    <button class="btn btn-primary w-100" type="button" onclick="location.href='{% url 'jobedit' %}'">Edit Workshops</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- View Accepted Section -->
-                        <div class="col-md-4">
-                            <div class="card mb-3">
-                                <div class="card-body text-center">
-                                    <h2 class="mb-3">View Candidates</h2>
-                                    <p>Click here to view the list of accepted candidates for your workshops.</p>
-                                    <button class="btn btn-primary w-100" type="button" onclick="location.href='{% url 'employer_list' %}'">View Candidates</button>
+                                    <h2 class="mb-3">Edit Your Jobs</h2>
+                                    <p>Click here to edit your posted jobs. You can modify or remove any of your jobs postings.</p>
+                                    <button class="btn btn-primary w-100" type="button" onclick="location.href='{% url 'jobedit' %}'">Edit Jobs</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
         </div>
